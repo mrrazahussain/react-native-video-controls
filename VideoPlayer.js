@@ -788,22 +788,15 @@ export default class VideoPlayer extends Component {
         this.setSeekerPosition(position);
         let state = this.state;
 
-        if (
-          this.player.scrubbingTimeStep > 0 &&
-          !state.loading &&
-          !state.scrubbing
-        ) {
+        if (this.player.scrubbingTimeStep > 0 && !state.loading && !state.scrubbing) {
           const time = this.calculateTimeFromSeekerPosition();
           const timeDifference = Math.abs(state.currentTime - time) * 1000;
 
-          if (
-            time < state.duration &&
-            timeDifference >= this.player.scrubbingTimeStep
-          ) {
+          if (time < state.duration && timeDifference >= this.player.scrubbingTimeStep) {
             state.scrubbing = true;
 
             this.setState(state);
-            setTimeout(() => {
+            setTimeout( () => {
               this.player.ref.seek(time, this.player.scrubbingTimeStep);
             }, 1);
           }
@@ -926,9 +919,7 @@ export default class VideoPlayer extends Component {
     const backControl = this.props.disableBack
       ? this.renderNullControl()
       : this.renderBack();
-    const volumeControl = this.props.disableVolume
-      ? this.renderNullControl()
-      : this.renderVolume();
+  
     const fullscreenControl = this.props.disableFullscreen
       ? this.renderNullControl()
       : this.renderFullscreen();
@@ -949,7 +940,7 @@ export default class VideoPlayer extends Component {
           <SafeAreaView style={styles.controls.topControlGroup}>
             {backControl}
             <View style={styles.controls.pullRight}>
-              {volumeControl}
+              {/* {volumeControl} */}
               {fullscreenControl}
             </View>
           </SafeAreaView>
@@ -1015,6 +1006,7 @@ export default class VideoPlayer extends Component {
    * Render bottom control group and wrap it in a holder
    */
   renderBottomControls() {
+    const volumeControl = this.props.disableVolume ? this.renderNullControl() : this.renderVolume(); 
     const timerControl = this.props.disableTimer
       ? this.renderNullControl()
       : this.renderTimer();
@@ -1042,7 +1034,8 @@ export default class VideoPlayer extends Component {
           <SafeAreaView
             style={[styles.controls.row, styles.controls.bottomControlGroup]}>
             {playPauseControl}
-            {this.renderTitle()}
+            { volumeControl }
+            {/* {this.renderTitle()} */}
             {timerControl}
           </SafeAreaView>
         </ImageBackground>
