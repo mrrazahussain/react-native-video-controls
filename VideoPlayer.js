@@ -323,7 +323,7 @@ export default class VideoPlayer extends Component {
    */
   setControlTimeout() {
     this.player.controlTimeout = setTimeout(() => {
-      this._hideControls();
+      // this._hideControls();
     }, this.player.controlTimeoutDelay);
   }
 
@@ -1375,6 +1375,7 @@ const styles = {
       marginTop: -24,
       marginLeft: -24,
       padding: 16,
+      backgroundColor: 'rgba(27, 106, 134, 0.5)'
     },
     icon: {
       marginLeft: 7,
