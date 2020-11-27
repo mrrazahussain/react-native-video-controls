@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import Video from 'react-native-video';
 import {
@@ -431,7 +432,7 @@ export default class VideoPlayer extends Component {
   _hideControls() {
     if (this.mounted) {
       let state = this.state;
-      state.showControls = false;
+      state.showControls = true;
       this.hideControlAnimation();
 
       this.setState(state);
